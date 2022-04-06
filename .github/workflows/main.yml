@@ -1,0 +1,52 @@
+name: Harbour for Windows ARM64 using MSVC
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    if: github.actor == github.event.repository.owner.login
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Checkout harbour/core repo
+      uses: actions/checkout@v2
+      with:
+       repository: harbour/core
+       path: harbour
+         
+    - name: Compile Harbour
+      shell: cmd
+      run: |
+        cd harbour
+        call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
+        set HB_COMPILER=msvc64
+        win-make.exe
+        
+    - name: Create output folders
+      shell: cmd
+      run: |
+        mkdir output
+        mkdir output\bin
+        copy harbour\bin\win\msvc64\*.exe output\bin
+        mkdir output\lib
+        copy harbour\lib\win\msvc64\*.lib output\lib
+        mkdir output\include 
+        copy harbour\include output\include
+        
+    - name: Get current time
+      uses: srfrnk/current-time@master
+      id: current-time
+      with:
+        format: YYYY_MM_DD
+ 
+    - name: Upload Harbour to artifact
+      env:
+         TIME: "${{ steps.current-time.outputs.formattedTime }}"
+      uses: actions/upload-artifact@v2
+      with:
+       name: harbour_winarm64_msvc_${{ env.TIME }}
+       path: output

@@ -29,18 +29,20 @@ jobs:
     - name: Copy Harbour x64
       shell: cmd
       run : |
-        mkdir hb64
-        mkdir hb64\bin
-        copy harbour\bin\*.exe hb64\bin
-        mkdir hb64\lib
-        copy harbour\lib\win\msvc64\*.lib hb64\lib
-        mkdir hb64\include 
-        copy harbour\include hb64\include
+        mkdir C:\hb64
+        mkdir C:\hb64\bin
+        copy harbour\bin\*.exe C:\hb64\bin
+        mkdir C:\hb64\lib
+        copy harbour\lib\win\msvc64\*.lib C:\hb64\lib
+        mkdir C:\hb64\include 
+        copy harbour\include C:\hb64\include
         
     - name: Compile Harbour ARM
       shell: cmd
       run: |
         cd harbour
+        rm bin\*.exe
+        rmdir lib /s /q
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
         set HB_COMPILER=msvc64
         set HB_HOST_BIN=hb64\bin

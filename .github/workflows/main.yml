@@ -31,7 +31,7 @@ jobs:
       run : |
         mkdir C:\hb64
         mkdir C:\hb64\bin
-        copy harbour\bin\*.exe C:\hb64\bin
+        copy harbour\bin\win\msvc64\*.exe C:\hb64\bin
         mkdir C:\hb64\lib
         copy harbour\lib\win\msvc64\*.lib C:\hb64\lib
         mkdir C:\hb64\include 
@@ -41,7 +41,7 @@ jobs:
       shell: cmd
       run: |
         cd harbour
-        del bin\*.exe
+        del bin\win\msvc64\*.exe
         rmdir lib /s /q
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
         set HB_COMPILER=msvc64

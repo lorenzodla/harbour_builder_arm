@@ -17,6 +17,12 @@ jobs:
       with:
        repository: harbour/core
        path: harbour
+       
+    - name: Checkout harbour/core repo
+      uses: actions/checkout@v2
+      with:
+       repository: harbour/core
+       path: harbourarm
          
     - name: Compile Harbour x64
       shell: cmd
@@ -40,8 +46,7 @@ jobs:
     - name: Compile Harbour ARM
       shell: cmd
       run: |
-        cd harbour
-        win-make.exe clean
+        cd harbourarm
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
         set HB_COMPILER=msvc64
         set HB_HOST_BIN=c:\hb64\bin

@@ -57,11 +57,11 @@ jobs:
       run: |
         mkdir output
         mkdir output\bin
-        copy harbour\bin\win\msvc64\*.exe output\bin
+        copy harbourarm\bin\win\msvc64\*.exe output\bin
         mkdir output\lib
-        copy harbour\lib\win\msvc64\*.lib output\lib
+        copy harbourarm\lib\win\msvc64\*.lib output\lib
         mkdir output\include 
-        copy harbour\include output\include
+        copy harbourarm\include output\include
         
     - name: Get current time
       uses: srfrnk/current-time@master

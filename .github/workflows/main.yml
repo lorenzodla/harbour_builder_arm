@@ -50,7 +50,7 @@ jobs:
         call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" amd64_arm64
         set HB_COMPILER=msvc64
         set HB_HOST_BIN=c:\hb64\bin
-        set HB_BUILD_CONTRIB=no
+        set HB_BUILD_CONTRIBS=no
         win-make.exe
         
     - name: Create output folders
